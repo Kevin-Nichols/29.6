@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <title class="nav-link m-2">Flask Feedback - {%block title%}{%endblock%}</title>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-primary justify-content-between ">
+    <a href="/" class="navbar-brand text-light">Flask Feedback</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item d-flex">
+          {%if 'username' in session%}
+          <a class="nav-link m-2 text-light" href="/logout">Logout</a>
+          {%else%}
+          <a class="nav-link m-2 text-light" href="/login">Login</a>
+          <a class="nav-link m-2 text-light" href="/register">Register User</a>
+          {%endif%}
+        </li>
+      </ul>
+  </nav>
+
+  <div class="container mt-4">
+    {%for category, msg in get_flashed_messages(with_categories=true)%}
+    <div class="alert alert-{{category}}">{{msg}}</div>
+    {%endfor%}
+  
+    {%block content%}
+    
+    {%endblock%}
+  </div>
+</body>
+</html>
